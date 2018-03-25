@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <script
+          src="https://code.jquery.com/jquery-2.2.4.min.js"
+          integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+          crossorigin="anonymous"></script>
+        <title></title>
+    </head>
+    <body>
+        <h2>multer & aws s3 upload example</h2>
+        <form id="myForm" onsubmit="return submitForm(this)">
+            <input type="file" name="file">
+            <button type="submit" name="button">업로드</button>
+        </form>
+
+        <script type="text/javascript">
+        function submitForm (frm) {
+            var formData = new FormData();
+            formData.append('file', frm.file.files[0]);
+            formData.append('email', frm.email.value);
+
+            $.ajax({
+                url: "/upload",
+                type: "POST",
+                processData: false,
+                contentType: false,
+                data: formData
+            }).done(function (result) {
+                console.log(result);
+            });
+
+            return false;
+        }
+        </script>
+    </body>
+</html>
